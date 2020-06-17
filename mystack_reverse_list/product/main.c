@@ -22,9 +22,9 @@ int printLinkedList(ELEMENT *listToPrint)
     return 0;
 }
 
-int reverseList(ELEMENT *listToReverse)
+int reverseList(ELEMENT **listToReverse)
 {
-    ELEMENT *current = listToReverse;
+    ELEMENT *current = *listToReverse;
     //ELEMENT *prevCurrent = NULL;
     //ELEMENT *toRemove = NULL;
     int stackHandle = mystack_create(sizeof(int));
@@ -37,18 +37,18 @@ int reverseList(ELEMENT *listToReverse)
         // RemoveElement(&list, toRemove, prevCurrent);
         
     }
-    CleanList(&listToReverse);
+    CleanList(listToReverse);
     // list = NULL;
     int data;
     mystack_pop(stackHandle, &data);
     //list = (ELEMENT *)malloc(sizeof(ELEMENT));
-    listToReverse = CreateNewElement(&data, sizeof(int), NULL);
-    // current = listToReverse;
-    // while(mystack_pop(stackHandle, &data) == 0)
-    // {
-    //     PushElementAfter(current, CreateNewElement(&data, sizeof(int), NULL));
-    //     //current = current->next;
-    // }
+    *listToReverse = CreateNewElement(&data, sizeof(int), NULL);
+    current = *listToReverse;
+    while (mystack_pop(stackHandle, &data) == 0)
+    {
+        PushElementAfter(current, CreateNewElement(&data, sizeof(int), NULL));
+        current = current->next;
+    }
 
     mystack_destroy(stackHandle);
 }
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     }
     printf("Normal list:\n");
     printLinkedList(list);
-    reverseList(list);
+    reverseList(&list);
     printf("Reverse list:\n");
     printLinkedList(list);
     return 0;

@@ -97,6 +97,10 @@ int mystack_pop(int handle, void *obj)
 			return -1;
 		}
 	}
+	if(currentStackList->list->data == NULL)
+	{
+		return -1;
+	}
 	memcpy(obj, currentStackList->list->data, currentStackList->objsize);
 	RemoveElement(&currentStackList->list, currentStackList->list, NULL);
 	currentStackList->numelem -= 1;
