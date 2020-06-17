@@ -14,6 +14,7 @@ void ShowList(ELEMENT *list)
         ELEMENT *current = list;
         while (current != NULL)
         {
+            printf("%d", *(int*)current->data);
             current = current->next;
             i++;
         }
@@ -70,6 +71,10 @@ void PushElementBefore(ELEMENT **beginningElement, ELEMENT *currentElement, ELEM
 
 void RemoveElement(ELEMENT **beginningElement, ELEMENT *elementToRemove, ELEMENT *prevElement)
 {
+    if(beginningElement == NULL || elementToRemove == NULL)
+    {
+        return;
+    }
     if (prevElement != NULL)
     {
         ELEMENT *nextElement = elementToRemove->next;
