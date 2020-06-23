@@ -6,7 +6,8 @@ UNITY_FOLDER=./Unity
 INC_DIRS=-Iproduct
 TEST_INC_DIRS=$(INC_DIRS) -I$(UNITY_FOLDER)
 
-SHARED_FILES=
+SHARED_FILES= product/Calculator.c \
+				product/ReverseList.c
 
 MAIN = product/main.c
 
@@ -36,7 +37,7 @@ $(MYSTACK_TEST): Makefile $(MYSTACK_TEST_FILES)  $(HEADER_FILES)
 	$(CC) $(TEST_INC_DIRS) $(TEST_SYMBOLS) $(MYSTACK_TEST_FILES) -o $(MYSTACK_TEST) -L. -lmystack
 
 $(MYSTACK_SHARED): $(MAIN)
-	$(CC) $(MAIN) -o mystack_shared -L. -lmystack
+	$(CC) $(MYSTACK_FILES) -o mystack_shared -L. -lmystack
 
 clean:
 	@rm -f $(ASSIGNMENT) $(MYSTACK_TEST) $(MYSTACK_SHARED)

@@ -28,4 +28,6 @@ extern int mystack_pop(int handle, void* obj);
 extern int mystack_destroy(int handle);
 extern int mystack_nofelem(int handle);
 
+extern void destroy_stack();
+
 #endif /* __MSTACK_H__ */

@@ -14,7 +14,7 @@ void ShowList(ELEMENT *list)
         ELEMENT *current = list;
         while (current != NULL)
         {
-            printf("%d", *(int*)current->data);
+            printf("%d", *(int *)current->data);
             current = current->next;
             i++;
         }
@@ -23,15 +23,22 @@ void ShowList(ELEMENT *list)
 
 void CleanList(ELEMENT **list)
 {
-    if (list != NULL)
+    if (list != NULL && *list != NULL)
     {
-        ELEMENT *current = (*list);
+        ELEMENT *current = NULL;
+        current = (*list);
         ELEMENT *toRemove = NULL;
         while (current != NULL)
         {
             toRemove = current;
             current = current->next;
+            if (toRemove->data != NULL)
+            {
+                free(toRemove->data);
+                toRemove->data = NULL;
+            }
             free(toRemove);
+            toRemove = NULL;
         }
     }
 }
@@ -71,7 +78,7 @@ void PushElementBefore(ELEMENT **beginningElement, ELEMENT *currentElement, ELEM
 
 void RemoveElement(ELEMENT **beginningElement, ELEMENT *elementToRemove, ELEMENT *prevElement)
 {
-    if(beginningElement == NULL || elementToRemove == NULL)
+    if (beginningElement == NULL || elementToRemove == NULL)
     {
         return;
     }
@@ -84,9 +91,11 @@ void RemoveElement(ELEMENT **beginningElement, ELEMENT *elementToRemove, ELEMENT
     {
         *beginningElement = elementToRemove->next;
     }
-    if(elementToRemove->data != NULL)
+    if (elementToRemove->data != NULL)
     {
         free(elementToRemove->data);
+        elementToRemove->data = NULL;
     }
     free(elementToRemove);
+    elementToRemove = NULL;
 }

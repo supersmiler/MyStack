@@ -2,6 +2,7 @@
 #define __MYSTACK_H__
 
 #include <stddef.h>
+#include "linked_list.h"
 
 /* The stack is an abstract data type.
  * this means that the internal structures are
@@ -12,7 +13,6 @@
  */
 
 /* note: library comtains is non-reentrant code */
-
 
 /* Creates a stack of c objects of sieze objsize and returns
  * a handle (number > 0 ) to the just created stack. On error, 
@@ -27,5 +27,7 @@ extern int mystack_push(int handle, void* obj);
 extern int mystack_pop(int handle, void* obj);
 extern int mystack_destroy(int handle);
 extern int mystack_nofelem(int handle);
+
+extern void destroy_stack();
 
 #endif /* __MSTACK_H__ */

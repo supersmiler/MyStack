@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "Calculator.C": "cpp",
+        "type_traits": "cpp"
+    }
+}

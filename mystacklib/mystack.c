@@ -38,6 +38,7 @@ int mystack_create(size_t objsize)
 	newStackList->numelem = 0;
 	newStackList->list = NULL;
 	newStackList->next = NULL;
+
 	if (currentStackList != NULL)
 	{
 		while (currentStackList->next != NULL)
@@ -45,7 +46,6 @@ int mystack_create(size_t objsize)
 			currentStackList = currentStackList->next;
 		}
 		newStackList->handle = (currentStackList->handle + 1);
-		DBG_PRINTF("Debug handle %d ", newStackList->handle);
 		currentStackList->next = newStackList;
 	}
 	else
@@ -75,6 +75,7 @@ int mystack_push(int handle, void *obj)
 	if(currentStackList->list == NULL)
 	{
 		currentStackList->list = (ELEMENT *)malloc(sizeof(ELEMENT));
+		currentStackList->list = NULL;
 	}
 	PushElementBefore(&currentStackList->list, currentStackList->list, NULL, CreateNewElement(obj, currentStackList->objsize, NULL));
 	currentStackList->numelem += 1;
@@ -84,7 +85,7 @@ int mystack_push(int handle, void *obj)
 
 int mystack_pop(int handle, void *obj)
 {
-	if (gStackList == NULL)
+	if (handle == 0 || gStackList == NULL || obj == NULL)
 	{
 		return -1;
 	}
@@ -97,7 +98,7 @@ int mystack_pop(int handle, void *obj)
 			return -1;
 		}
 	}
-	if(currentStackList->list->data == NULL)
+	if(currentStackList->list == NULL)
 	{
 		return -1;
 	}
@@ -132,6 +133,7 @@ int mystack_destroy(int handle)
 				gStackList = stackToRemove->next;
 			}
 			free(stackToRemove);
+			stackToRemove = NULL;
 			DBG_PRINTF("handle: %d\n", handle);
 			return 0;
 		}
@@ -158,4 +160,10 @@ int mystack_nofelem(int handle)
 	}
 	DBG_PRINTF("handle: %d\n", handle);
 	return currentStackList->numelem;
+}
+
+void destroy_stack()
+{
+	free(gStackList);
+	gStackList = NULL;
 }
