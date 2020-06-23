@@ -9,34 +9,32 @@
 
 int main(int argc, char *argv[])
 {
-  int selected;
+	int selected;
 
-  while (true)
-  {
-    printf("\n"
-           "Select a assignment\n"
-           "===================\n"
-           "[1] Reverse list\n"
-           "[2] Calculator\n");
+	while (true)
+	{
+		printf("\n"
+			   "Select a assignment\n"
+			   "===================\n"
+			   "[1] Reverse list\n"
+			   "[2] Calculator\n");
 
-    printf("Enter number :");
-    scanf("%d", &selected);
+		printf("Enter number :");
+		scanf("%d", &selected);
 
-    switch (selected)
-    {
-    case 1:
-      reverseList();
-      break;
-    case 2:
-      calculator();
-      break;
-    default:
-      printf("Invalid selection!\n");
-      break;
-    }
-  }
+		switch (selected)
+		{
+		case 1:
+			reverseList();
+			break;
+		case 2:
+			calculator();
+			break;
+		default:
+			printf("Invalid selection!\n");
+			break;
+		}
+	}
 
-  return 0;
+	return 0;
 }
-
-
